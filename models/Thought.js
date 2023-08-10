@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
-const assignmentSchema = require('./Assignment');
+const reactionSchema = require('./Reaction');
+const dataFormat = require("../utils/data.js")
 
 // Schema to create Student model
 const thoughtSchema = new Schema(
@@ -13,13 +14,13 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now(),
-      // Add format getter here
+      get: (timestamp) => dataFormat(timestamp)
     },
     username: {
       type: String,
       required: true
     },
-    reactions: [assignmentSchema],
+    reactions: [reactionSchema],
   },
   {
     toJSON: {
