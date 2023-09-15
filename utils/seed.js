@@ -5,8 +5,8 @@ const connection = require("../config/connection");
 
 const users = [
   {
-    username: "Ryan",
-    email: "ryan@gmail.com",
+    username: "user1",
+    email: "user1@email.com",
     thought: [],
   },
 ];
