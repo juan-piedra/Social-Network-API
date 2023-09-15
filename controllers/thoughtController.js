@@ -1,16 +1,18 @@
 const { User, Thought } = require("../models");
 
 const thoughtController = {
+  // Get all thoughts.
   async getThoughts(req, res) {
     try {
       const thoughts = await Thought.find();
       return res.status(200).json(thoughts);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return res.status(500).json(err);
     }
   },
 
+  // Get a single thought by ID.
   async getThought(req, res) {
     try {
       const thought = await Thought.findOne({ _id: req.params.thoughtId });
@@ -21,11 +23,12 @@ const thoughtController = {
 
       return res.status(200).json(thought);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return res.status(500).json(err);
     }
   },
 
+  // Create a new thought.
   async createThought(req, res) {
     try {
       const thought = await Thought.create(req.body);
@@ -38,11 +41,12 @@ const thoughtController = {
 
       return res.status(200).json({ thought, user });
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return res.status(500).json(err);
     }
   },
 
+  // Update a thought by ID.
   async updateThought(req, res) {
     try {
       const thought = await Thought.findOneAndUpdate(
@@ -52,16 +56,17 @@ const thoughtController = {
       );
 
       if (!thought) {
-        return res.status(404).json({ message: "No thought with this id!" });
+        return res.status(404).json({ message: "No thought with this ID" });
       }
 
       return res.status(200).json(thought);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return res.status(500).json(err);
     }
   },
 
+  // Delete a thought by ID.
   async deleteThought(req, res) {
     try {
       const thought = await Thought.findOneAndDelete({
@@ -76,11 +81,12 @@ const thoughtController = {
         message: "Thought & associated reactions successfully deleted",
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return res.status(500).json(err);
     }
   },
 
+  // Add a reaction to a thought.
   async addReaction(req, res) {
     try {
       const reaction = await Thought.findOneAndUpdate(
@@ -95,11 +101,12 @@ const thoughtController = {
 
       return res.status(200).json(reaction);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return res.status(500).json(err);
     }
   },
 
+  // Delete a reaction from a thought by ID.
   async deleteReaction(req, res) {
     try {
       const reaction = await Thought.findOneAndUpdate(
@@ -116,7 +123,7 @@ const thoughtController = {
 
       return res.status(200).json(reaction);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return res.status(500).json(err);
     }
   },
